@@ -1,0 +1,369 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>AdvertiseAI Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+
+<!-- NAVBAR -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        Advertise<span>AI</span>
+    </div>
+
+    <div class="nav-right">
+
+        <span>
+            Hi, {{ session["user_name"] }}
+        </span>
+
+        <a href="{{ url_for('logout') }}">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+
+<!-- DASHBOARD -->
+
+<div class="dashboard">
+
+
+    <!-- HEADER -->
+
+    <div class="dashboard-header">
+
+        <div>
+
+            <p class="small-title">
+                MACHINE LEARNING
+            </p>
+
+            <h1>
+                Advertising Sales Predictor
+            </h1>
+
+            <p class="description">
+                Predict your expected sales using
+                advertising investment data.
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- FEATURE CARDS -->
+
+    <div class="feature-cards">
+
+
+        <div class="feature-card">
+
+            <div class="icon tv">
+                TV
+            </div>
+
+            <div>
+
+                <h3>
+                    TV Advertising
+                </h3>
+
+                <p>
+                    Enter TV advertising budget
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="feature-card">
+
+            <div class="icon radio">
+                R
+            </div>
+
+            <div>
+
+                <h3>
+                    Radio Advertising
+                </h3>
+
+                <p>
+                    Enter Radio advertising budget
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="feature-card">
+
+            <div class="icon newspaper">
+                N
+            </div>
+
+            <div>
+
+                <h3>
+                    Newspaper
+                </h3>
+
+                <p>
+                    Enter Newspaper advertising budget
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- MAIN GRID -->
+
+    <div class="main-grid">
+
+
+        <!-- FORM -->
+
+        <div class="card">
+
+            <div class="card-title">
+
+                <p class="small-title">
+                    PREDICTION INPUT
+                </p>
+
+                <h2>
+                    Enter Advertising Data
+                </h2>
+
+                <p>
+                    Provide your advertising investment
+                    for each channel.
+                </p>
+
+            </div>
+
+
+            <form method="POST">
+
+
+                <label>
+                    TV Advertising
+                </label>
+
+                <input
+                    type="number"
+                    name="tv"
+                    step="any"
+                    min="0"
+                    placeholder="Example: 150"
+                    required
+                >
+
+
+                <label>
+                    Radio Advertising
+                </label>
+
+                <input
+                    type="number"
+                    name="radio"
+                    step="any"
+                    min="0"
+                    placeholder="Example: 30"
+                    required
+                >
+
+
+                <label>
+                    Newspaper Advertising
+                </label>
+
+                <input
+                    type="number"
+                    name="newspaper"
+                    step="any"
+                    min="0"
+                    placeholder="Example: 40"
+                    required
+                >
+
+
+                <button type="submit">
+                    Predict Sales
+                    <span>→</span>
+                </button>
+
+            </form>
+
+        </div>
+
+
+
+        <!-- RESULT -->
+
+        <div class="result-card">
+
+
+            {% if prediction is not none %}
+
+
+                <p class="small-title">
+                    PREDICTION RESULT
+                </p>
+
+
+                <div class="result-circle">
+
+                    <span>
+                        Estimated Sales
+                    </span>
+
+                    <strong>
+                        {{ prediction }}
+                    </strong>
+
+                    <small>
+                        units
+                    </small>
+
+                </div>
+
+
+                <h2>
+                    Prediction Generated
+                </h2>
+
+                <p>
+                    Your advertising data has been
+                    processed by the Linear Regression
+                    machine learning model.
+                </p>
+
+
+                <div class="model-status">
+
+                    <span>
+                        ●
+                    </span>
+
+                    Model Active
+
+                </div>
+
+
+            {% else %}
+
+
+                <div class="empty-result">
+
+                    <div class="result-icon">
+                        ✦
+                    </div>
+
+                    <p class="small-title">
+                        ML PREDICTION
+                    </p>
+
+                    <h2>
+                        Ready to Predict
+                    </h2>
+
+                    <p>
+                        Enter your TV, Radio and Newspaper
+                        advertising values to generate
+                        your sales prediction.
+                    </p>
+
+                </div>
+
+
+            {% endif %}
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- MODEL INFORMATION -->
+
+    <div class="model-card">
+
+        <div>
+
+            <p class="small-title">
+                MODEL INFORMATION
+            </p>
+
+            <h2>
+                Linear Regression
+            </h2>
+
+            <p>
+                The model uses three advertising
+                features to estimate sales.
+            </p>
+
+        </div>
+
+
+        <div class="model-features">
+
+            <span>TV</span>
+
+            <span>Radio</span>
+
+            <span>Newspaper</span>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<footer>
+
+    AdvertiseAI • Machine Learning Prediction System
+
+</footer>
+
+
+</body>
+
+</html>
+```

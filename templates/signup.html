@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>AdvertiseAI | Signup</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body class="auth-body">
+
+
+<div class="auth-container">
+
+
+    <!-- LEFT -->
+
+    <div class="auth-left">
+
+        <div class="logo">
+            Advertise<span>AI</span>
+        </div>
+
+
+        <div class="auth-message">
+
+            <p class="small-title">
+                START YOUR JOURNEY
+            </p>
+
+            <h1>
+                Turn advertising
+                data into insights.
+            </h1>
+
+            <p>
+                Create your account and start
+                predicting expected sales using
+                machine learning.
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- RIGHT -->
+
+    <div class="auth-right">
+
+        <div class="auth-box">
+
+
+            <p class="small-title">
+                GET STARTED
+            </p>
+
+            <h2>
+                Create your account
+            </h2>
+
+            <p class="auth-description">
+                Create an account to use the
+                prediction dashboard.
+            </p>
+
+
+            {% with messages = get_flashed_messages() %}
+
+                {% for message in messages %}
+
+                    <div class="message">
+                        {{ message }}
+                    </div>
+
+                {% endfor %}
+
+            {% endwith %}
+
+
+            <form method="POST">
+
+
+                <label>
+                    Full Name
+                </label>
+
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="Enter your name"
+                    required
+                >
+
+
+                <label>
+                    Email
+                </label>
+
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    required
+                >
+
+
+                <label>
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Create a password"
+                    required
+                >
+
+
+                <button type="submit">
+                    Create Account →
+                </button>
+
+
+            </form>
+
+
+            <p class="switch">
+
+                Already have an account?
+
+                <a href="{{ url_for('login') }}">
+                    Login
+                </a>
+
+            </p>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</body>
+
+</html>
+
