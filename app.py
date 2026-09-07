@@ -29,7 +29,19 @@ with open("Advertising_model.pkl", "rb") as file:
 # -------------------------------
 
 def get_db():
-    return psycopg.connect(DATABASE_URL)
+    database_url = (
+        os.environ.get("DATABASE_URL")
+        or os.environ.get("POSTGRES_URL")
+        or os.environ.get("POSTGRES_PRISMA_URL")
+        or os.environ.get("POSTGRES_URL_NON_POOLING")
+    )
+
+    if not database_url:
+        raise RuntimeError(
+            "No PostgreSQL connection found."
+        )
+
+    return psycopg.connect(database_url)
 
 
 # -------------------------------
