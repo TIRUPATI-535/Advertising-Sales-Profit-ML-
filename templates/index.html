@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -9,9 +10,12 @@
 
     <link rel="stylesheet"
           href="{{ url_for('static', filename='style.css') }}">
+
 </head>
 
+
 <body>
+
 
     <!-- ================= NAVBAR ================= -->
 
@@ -22,6 +26,7 @@
             <a href="{{ url_for('index') }}" class="logo">
                 Advertise<span>AI</span>
             </a>
+
 
             <div class="nav-links">
 
@@ -44,11 +49,13 @@
     </nav>
 
 
+
     <!-- ================= MAIN ================= -->
 
     <main class="container">
 
-        <!-- HERO SECTION -->
+
+        <!-- ================= HERO SECTION ================= -->
 
         <section class="hero">
 
@@ -59,10 +66,12 @@
                     MACHINE LEARNING
                 </div>
 
+
                 <h1>
                     Advertising Sales
                     <span>Predictor</span>
                 </h1>
+
 
                 <p>
                     Predict expected sales using your advertising
@@ -71,6 +80,7 @@
 
             </div>
 
+
             <div class="hero-model">
 
                 <div class="model-icon">
@@ -78,8 +88,11 @@
                 </div>
 
                 <div>
+
                     <strong>Linear Regression</strong>
+
                     <small>Prediction Model</small>
+
                 </div>
 
             </div>
@@ -87,9 +100,11 @@
         </section>
 
 
+
         <!-- ================= CHANNEL CARDS ================= -->
 
         <section class="channel-grid">
+
 
             <div class="channel-card tv-card">
 
@@ -98,8 +113,11 @@
                 </div>
 
                 <div>
+
                     <h3>TV Advertising</h3>
+
                     <p>Television advertising budget</p>
+
                 </div>
 
                 <div class="channel-arrow">
@@ -107,6 +125,7 @@
                 </div>
 
             </div>
+
 
 
             <div class="channel-card radio-card">
@@ -116,8 +135,11 @@
                 </div>
 
                 <div>
+
                     <h3>Radio Advertising</h3>
+
                     <p>Radio advertising budget</p>
+
                 </div>
 
                 <div class="channel-arrow">
@@ -127,6 +149,7 @@
             </div>
 
 
+
             <div class="channel-card news-card">
 
                 <div class="channel-icon">
@@ -134,8 +157,11 @@
                 </div>
 
                 <div>
+
                     <h3>Newspaper</h3>
+
                     <p>Newspaper advertising budget</p>
+
                 </div>
 
                 <div class="channel-arrow">
@@ -147,12 +173,13 @@
         </section>
 
 
+
         <!-- ================= MAIN GRID ================= -->
 
         <section class="prediction-grid">
 
 
-            <!-- INPUT CARD -->
+            <!-- ================= INPUT CARD ================= -->
 
             <div class="input-card">
 
@@ -174,6 +201,7 @@
                 </div>
 
 
+
                 <form method="POST">
 
 
@@ -182,15 +210,20 @@
                     <div class="input-group">
 
                         <label for="tv">
+
                             <span>TV Advertising</span>
+
                             <small>Budget</small>
+
                         </label>
+
 
                         <div class="input-wrapper">
 
                             <span class="input-icon">
                                 TV
                             </span>
+
 
                             <input
                                 type="number"
@@ -207,20 +240,26 @@
                     </div>
 
 
+
                     <!-- RADIO -->
 
                     <div class="input-group">
 
                         <label for="radio">
+
                             <span>Radio Advertising</span>
+
                             <small>Budget</small>
+
                         </label>
+
 
                         <div class="input-wrapper">
 
                             <span class="input-icon">
                                 R
                             </span>
+
 
                             <input
                                 type="number"
@@ -237,20 +276,26 @@
                     </div>
 
 
+
                     <!-- NEWSPAPER -->
 
                     <div class="input-group">
 
                         <label for="newspaper">
+
                             <span>Newspaper Advertising</span>
+
                             <small>Budget</small>
+
                         </label>
+
 
                         <div class="input-wrapper">
 
                             <span class="input-icon">
                                 N
                             </span>
+
 
                             <input
                                 type="number"
@@ -265,6 +310,7 @@
                         </div>
 
                     </div>
+
 
 
                     <button type="submit" class="predict-btn">
@@ -284,9 +330,11 @@
             </div>
 
 
-            <!-- RESULT CARD -->
+
+            <!-- ================= RESULT CARD ================= -->
 
             <div class="result-card">
+
 
                 {% if prediction is not none %}
 
@@ -296,33 +344,43 @@
                         ✓
                     </div>
 
+
                     <div class="section-label">
                         PREDICTION RESULT
                     </div>
+
 
                     <h2>
                         Estimated Sales
                     </h2>
 
+
                     <div class="prediction-value">
                         {{ prediction }}
                     </div>
 
+
                     <div class="units">
                         Estimated Units
                     </div>
+
 
                     <p>
                         Your advertising investment has been
                         analyzed using the Linear Regression model.
                     </p>
 
+
                     <div class="status">
+
                         <span></span>
+
                         Model Prediction Successful
+
                     </div>
 
                 </div>
+
 
                 {% else %}
 
@@ -332,13 +390,16 @@
                         ✦
                     </div>
 
+
                     <div class="section-label">
                         ML PREDICTION
                     </div>
 
+
                     <h2>
                         Ready to Predict
                     </h2>
+
 
                     <p>
                         Enter your TV, Radio and Newspaper
@@ -346,9 +407,13 @@
                         estimated sales.
                     </p>
 
+
                     <div class="ready-line">
+
                         <span></span>
+
                         Model Ready
+
                     </div>
 
                 </div>
@@ -357,12 +422,64 @@
 
             </div>
 
+
+
+            <!-- ================= AI ANALYSIS CARD ================= -->
+
+            {% if ai_analysis %}
+
+            <div class="ai-analysis-card">
+
+                <div class="ai-analysis-header">
+
+                    <div class="ai-icon">
+                        AI
+                    </div>
+
+
+                    <div>
+
+                        <div class="section-label">
+                            AI SALES ANALYSIS
+                        </div>
+
+                        <h2>
+                            Smart Insights
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <div class="ai-analysis-content">
+
+                    {{ ai_analysis }}
+
+                </div>
+
+
+                <div class="ai-status">
+
+                    <span></span>
+
+                    Powered by OpenRouter AI
+
+                </div>
+
+            </div>
+
+            {% endif %}
+
+
         </section>
+
 
 
         <!-- ================= INFORMATION CARDS ================= -->
 
         <section class="info-grid">
+
 
             <div class="info-card">
 
@@ -371,12 +488,19 @@
                 </div>
 
                 <div>
+
                     <small>MODEL TYPE</small>
+
                     <h3>Linear Regression</h3>
-                    <p>Machine learning prediction model</p>
+
+                    <p>
+                        Machine learning prediction model
+                    </p>
+
                 </div>
 
             </div>
+
 
 
             <div class="info-card">
@@ -386,12 +510,19 @@
                 </div>
 
                 <div>
+
                     <small>INPUT FEATURES</small>
+
                     <h3>3 Advertising Channels</h3>
-                    <p>TV • Radio • Newspaper</p>
+
+                    <p>
+                        TV • Radio • Newspaper
+                    </p>
+
                 </div>
 
             </div>
+
 
 
             <div class="info-card">
@@ -401,9 +532,15 @@
                 </div>
 
                 <div>
+
                     <small>DATA STORAGE</small>
+
                     <h3>PostgreSQL</h3>
-                    <p>Prediction data securely stored</p>
+
+                    <p>
+                        Prediction data securely stored
+                    </p>
+
                 </div>
 
             </div>
@@ -411,6 +548,7 @@
         </section>
 
     </main>
+
 
 
     <!-- ================= WHATSAPP ================= -->
@@ -433,22 +571,33 @@
     </a>
 
 
+
     <!-- ================= FOOTER ================= -->
 
     <footer>
 
         <div>
-            <strong>Advertise<span>AI</span></strong>
+
+            <strong>
+                Advertise<span>AI</span>
+            </strong>
+
             <p>
                 Machine Learning Sales Prediction System
             </p>
+
         </div>
 
+
         <div>
+
             © 2026 AdvertiseAI
+
         </div>
 
     </footer>
 
+
 </body>
+
 </html>

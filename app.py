@@ -1,9 +1,15 @@
 import os
 import pickle
+import requests
 import psycopg
 
+from dotenv import load_dotenv
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from werkzeug.security import generate_password_hash, check_password_hash
+
+
+# Load environment variables
+load_dotenv()
 
 
 app = Flask(__name__)
@@ -18,6 +24,76 @@ app.secret_key = os.environ.get("SECRET_KEY", "mysecretkey")
 
 with open("Advertising_model.pkl", "rb") as file:
     model = pickle.load(file)
+
+
+# -------------------------------
+# OpenRouter AI
+# -------------------------------
+
+def get_ai_analysis(tv, radio, newspaper, prediction):
+
+    api_key = os.environ.get("OPENROUTER_API_KEY")
+
+    if not api_key:
+        return "AI analysis is currently unavailable."
+
+    url = "https://openrouter.ai/api/v1/chat/completions"
+
+    headers = {
+        "Authorization": f"Bearer {api_key}",
+        "Content-Type": "application/json"
+    }
+
+    prompt = f"""
+You are a sales analysis assistant.
+
+Advertising spending:
+TV: {tv}
+Radio: {radio}
+Newspaper: {newspaper}
+
+Predicted sales: {prediction}
+
+Explain the prediction in simple language.
+Mention which advertising channel has the highest spending.
+Give 2 short practical suggestions to improve sales.
+Keep the answer concise and easy to understand.
+"""
+
+    data = {
+        "model": "openrouter/free",
+        "messages": [
+            {
+                "role": "user",
+                "content": prompt
+            }
+        ]
+    }
+
+    try:
+
+        response = requests.post(
+            url,
+            headers=headers,
+            json=data,
+            timeout=30
+        )
+
+        if response.status_code != 200:
+
+            print("OpenRouter Error:", response.text)
+
+            return "AI analysis could not be generated."
+
+        result = response.json()
+
+        return result["choices"][0]["message"]["content"]
+
+    except Exception as e:
+
+        print("OpenRouter Error:", e)
+
+        return "AI analysis could not be generated."
 
 
 # -------------------------------
@@ -88,6 +164,7 @@ def index():
         return redirect(url_for("login"))
 
     prediction = None
+    ai_analysis = None
 
     if request.method == "POST":
 
@@ -100,6 +177,14 @@ def index():
         result = model.predict([[tv, radio, newspaper]])
 
         prediction = round(float(result[0]), 2)
+
+        # Get AI analysis
+        ai_analysis = get_ai_analysis(
+            tv,
+            radio,
+            newspaper,
+            prediction
+        )
 
         # Save prediction
         conn = get_db()
@@ -127,7 +212,8 @@ def index():
 
     return render_template(
         "index.html",
-        prediction=prediction
+        prediction=prediction,
+        ai_analysis=ai_analysis
     )
 
 
