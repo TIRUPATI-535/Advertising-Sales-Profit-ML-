@@ -72,7 +72,7 @@ def get_db():
 # Dashboard
 # -------------------------------
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/login", methods=["GET", "POST"])
 def index():
 
     if "user_id" not in session:
