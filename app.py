@@ -25,6 +25,7 @@ with open("Advertising_model.pkl", "rb") as file:
 # -------------------------------
 
 def get_db():
+
     database_url = (
         os.environ.get("DATABASE_URL")
         or os.environ.get("POSTGRES_URL")
@@ -33,9 +34,7 @@ def get_db():
     )
 
     if not database_url:
-        raise RuntimeError(
-            "No PostgreSQL connection found."
-        )
+        raise RuntimeError("No PostgreSQL connection found.")
 
     db = psycopg.connect(database_url)
 
@@ -69,10 +68,20 @@ def get_db():
 
 
 # -------------------------------
+# Home Page
+# -------------------------------
+
+@app.route("/")
+def home():
+
+    return redirect(url_for("signup"))
+
+
+# -------------------------------
 # Dashboard
 # -------------------------------
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/dashboard", methods=["GET", "POST"])
 def index():
 
     if "user_id" not in session:
