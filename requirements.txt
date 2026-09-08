@@ -1,3 +1,6 @@
 Flask
 psycopg[binary]
 scikit-learn
+Werkzeug
+requests
+python-dotenv
