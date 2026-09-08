@@ -12,9 +12,6 @@ app = Flask(__name__)
 # Secret key
 app.secret_key = os.environ.get("SECRET_KEY", "mysecretkey")
 
-# Database URL from Neon / Vercel
-DATABASE_URL = os.environ.get("DATABASE_URL")
-
 
 # -------------------------------
 # Load ML Model
