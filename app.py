@@ -30,6 +30,10 @@ with open("Advertising_model.pkl", "rb") as file:
 # OpenRouter AI
 # -------------------------------
 
+# -------------------------------
+# OpenRouter AI
+# -------------------------------
+
 def get_ai_analysis(tv, radio, newspaper, prediction):
 
     api_key = os.environ.get("OPENROUTER_API_KEY")
@@ -44,20 +48,49 @@ def get_ai_analysis(tv, radio, newspaper, prediction):
         "Content-Type": "application/json"
     }
 
+    # Linear Regression coefficients
+    tv_coefficient = 0.04472952
+    radio_coefficient = 0.18919505
+    newspaper_coefficient = 0.00276111
+
     prompt = f"""
-You are a sales analysis assistant.
+You are an AI sales analysis assistant for an Advertising Sales Prediction system.
+
+The system uses a Linear Regression machine learning model.
 
 Advertising spending:
-TV: {tv}
-Radio: {radio}
-Newspaper: {newspaper}
+- TV: {tv}
+- Radio: {radio}
+- Newspaper: {newspaper}
 
-Predicted sales: {prediction}
+Predicted sales:
+- {prediction} units
 
-Explain the prediction in simple language.
-Mention which advertising channel has the highest spending.
-Give 2 short practical suggestions to improve sales.
-Keep the answer concise and easy to understand.
+Model coefficients:
+- TV coefficient: {tv_coefficient}
+- Radio coefficient: {radio_coefficient}
+- Newspaper coefficient: {newspaper_coefficient}
+
+Important:
+Do NOT say that the channel with the highest spending is automatically the most influential.
+Use the model coefficients to identify which advertising channel has the strongest relationship with predicted sales.
+
+Give the response in this exact simple structure:
+
+Prediction Summary:
+Briefly explain the predicted sales.
+
+Most Influential Channel:
+Mention the channel with the strongest model coefficient and explain it simply.
+
+Advertising Spend:
+Mention which channel currently has the highest spending.
+
+Recommendations:
+Give exactly 2 short and practical recommendations based on the model and current spending.
+
+Keep the complete response concise, professional, and easy to understand.
+Do not use complicated mathematical terminology.
 """
 
     data = {
@@ -80,9 +113,7 @@ Keep the answer concise and easy to understand.
         )
 
         if response.status_code != 200:
-
             print("OpenRouter Error:", response.text)
-
             return "AI analysis could not be generated."
 
         result = response.json()
@@ -94,8 +125,6 @@ Keep the answer concise and easy to understand.
         print("OpenRouter Error:", e)
 
         return "AI analysis could not be generated."
-
-
 # -------------------------------
 # Database Connection
 # -------------------------------
