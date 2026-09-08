@@ -1,4 +1,3 @@
-
 import os
 import pickle
 import psycopg
@@ -38,7 +37,35 @@ def get_db():
             "No PostgreSQL connection found."
         )
 
-    return psycopg.connect(database_url)
+    db = psycopg.connect(database_url)
+
+    with db.cursor() as cursor:
+
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS users (
+                id SERIAL PRIMARY KEY,
+                full_name VARCHAR(100) NOT NULL,
+                email VARCHAR(150) UNIQUE NOT NULL,
+                password_hash TEXT NOT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        """)
+
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS predictions (
+                id SERIAL PRIMARY KEY,
+                user_id INTEGER REFERENCES users(id),
+                tv REAL,
+                radio REAL,
+                newspaper REAL,
+                predicted_sales REAL,
+                created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+            )
+        """)
+
+    db.commit()
+
+    return db
 
 
 # -------------------------------
@@ -201,4 +228,3 @@ def logout():
 
 if __name__ == "__main__":
     app.run(debug=True)
-
